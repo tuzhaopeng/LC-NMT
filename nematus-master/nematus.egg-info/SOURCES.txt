@@ -1,0 +1,16 @@
+setup.py
+nematus/__init__.py
+nematus/alignment_util.py
+nematus/data_iterator.py
+nematus/nmt.py
+nematus/nmt_context.py
+nematus/rescore.py
+nematus/score.py
+nematus/shuffle.py
+nematus/translate.py
+nematus/util.py
+nematus.egg-info/PKG-INFO
+nematus.egg-info/SOURCES.txt
+nematus.egg-info/dependency_links.txt
+nematus.egg-info/requires.txt
+nematus.egg-info/top_level.txt
