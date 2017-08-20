@@ -1,12 +1,12 @@
 # LC-NMT
-Larger-Context NMT
+Larger-Context Neural Machine Translation
 
-NMT-Coverage
+Larger-Context NMT v0.1
 ===========================
 
-In this version, we introduce a coverage mechanism (NMT-Coverage) to indicate whether a source word is translated or not, which proves to alleviate over-translation and under-translation. If you use the code, please cite <a href="http://arxiv.org/abs/1601.04811">our paper</a>:
+In this version, we introduce a cross-sentence context-aware approach to investigate the influence of historical contextual information on the performance of NMT. If you use the code, please cite <a href="https://arxiv.org/pdf/1704.04347.pdf">our paper</a>:
 
-<pre><code>@InProceedings{Tu:2016:ACL,
+<pre><code>@InProceedings{Wang:2017:EMNLP,
   author    = {Wang, Longyue and Tu, Zhaopeng and Way, Andy and Liu Qun},
   title     = {Exploiting Cross-Sentence Context for Neural Machine Translation},
   booktitle = {Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing},
@@ -14,15 +14,29 @@ In this version, we introduce a coverage mechanism (NMT-Coverage) to indicate wh
 }
 </code></pre>
 
-For any comments or questions, please  email <a href="mailto:vincentwang0229@gmail.com">Longyue Wang</a> and <a href="mailto:tuzhaopeng@gmail.com">Zhaopeng Tu</a>.
+This package is based on the old version of Nematus by EdinburghNLP (https://github.com/EdinburghNLP/nematus). If you use Nematus, please cite the following paper:
 
+<pre><code>@InProceedings{sennrich-EtAl:2017:EACLDemo,
+  author    = {Sennrich, Rico  and  Firat, Orhan  and  Cho, Kyunghyun  and  Birch, Alexandra  and  Haddow, Barry  and  Hitschler, Julian  and  Junczys-Dowmunt, Marcin  and  L\"{a}ubli, Samuel  and  Miceli Barone, Antonio Valerio  and  Mokry, Jozef  and  Nadejde, Maria},
+  title     = {Nematus: a Toolkit for Neural Machine Translation},
+  booktitle = {Proceedings of the Software Demonstrations of the 15th Conference of the European Chapter of the Association for Computational Linguistics},
+  month     = {April},
+  year      = {2017},
+  address   = {Valencia, Spain},
+  publisher = {Association for Computational Linguistics},
+  pages     = {65--68},
+  url       = {http://aclweb.org/anthology/E17-3017}
+}
+</code></pre>
+
+For any comments or questions, please  email <a href="mailto:vincentwang0229@gmail.com">Longyue Wang</a> and <a href="mailto:tuzhaopeng@gmail.com">Zhaopeng Tu</a>.
 
 Installation
 ------------
 
-NMT-Coverage is developed by <a href="http://www.zptu.net">Zhaopeng Tu</a>, which is on top of lisa-groudhog (https://github.com/lisa-groundhog/GroundHog). It requires Theano0.8 or above version (for the module "scan" used in the trainer).
+LC-NMT is developed by <a href="http://computing.dcu.ie/~lwang/">Longyue Wang</a> and <a href="http://www.zptu.net">Zhaopeng Tu</a>, which is on top of Nematus. It requires Theano0.8 or above version (for the module "scan" used in the trainer).
 
-To install NMT-Coverage in a multi-user setting
+To install LC-NMT in a multi-user setting
 
 ``python setup.py develop --user``
 
@@ -38,9 +52,25 @@ How to Run?
 
 1, Pre-processing
 
-Assume that the number of history sentence is 5 ($hist_len = 5$)
+We need to process train/dev/test files from common format into historical one. Assume that the number of history sentence is 2 (hist_len = 2).
 
-Process the source side file (train/dev/test) into the following format:
+The orignal format is:
+
+<pre><code>
+And of course , we all share the same adaptive imperatives .
+We 're all born . We all bring our children into the world .
+We go through initiation rites .
+We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .
+</code></pre>
+
+The historical format is:
+
+<pre><code>
+NULL@@@@And of course , we all share the same adaptive imperatives .
+And of course , we all share the same adaptive imperatives .@@@@We 're all born . We all bring our children into the world .
+And of course , we all share the same adaptive imperatives .####We 're all born . We all bring our children into the world .@@@@We go through initiation rites .
+We 're all born . We all bring our children into the world .####We go through initiation rites .@@@@We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .
+</code></pre>
 
 
 
