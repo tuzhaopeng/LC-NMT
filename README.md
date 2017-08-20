@@ -52,25 +52,36 @@ How to Run?
 
 1, Pre-processing
 
-We need to process train/dev/test files from common format into historical one. Assume that the number of history sentence is 2 (hist_len = 2).
+We need to process train/dev/test files from common format into historical one. Assume that the number of history sentence is 2 (hist_len = 2). For example:
 
 The orignal format is:
 
-<pre><code>
-And of course , we all share the same adaptive imperatives .
+<pre><code>And of course , we all share the same adaptive imperatives .
 We 're all born . We all bring our children into the world .
 We go through initiation rites .
-We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .
-</code></pre>
+We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .</code></pre>
 
 The historical format is:
 
-<pre><code>
-NULL@@@@And of course , we all share the same adaptive imperatives .
+<pre><code>NULL@@@@And of course , we all share the same adaptive imperatives .
 And of course , we all share the same adaptive imperatives .@@@@We 're all born . We all bring our children into the world .
 And of course , we all share the same adaptive imperatives .####We 're all born . We all bring our children into the world .@@@@We go through initiation rites .
-We 're all born . We all bring our children into the world .####We go through initiation rites .@@@@We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .
-</code></pre>
+We 're all born . We all bring our children into the world .####We go through initiation rites .@@@@We have to deal with the inexorable separation of death , so it shouldn 't surprise us that we all sing , we all dance , we all have art .</code></pre>
 
+where the delimiter "@@@@" is used to separate historical and current sentences; and the the delimiter "####" is sentence boundary.
 
+2, Training
+
+2.1 Use data_iterator_src_hist.py instead of data_iterator.py for loading data.
+
+2.2 Use hnmt_src_static_*.py instead of nmt.py for training. For example, hnmt_src_static_gate_src_init_two.py means +Init_{enc+dec}+Gating Auxi in the paper.
+
+2.3 Use translate_src_static_*.py instead of translate.py for decoding. For instance, translate_src_static_gate_src_init_two.py means +Init_{enc+dec}+Gating Auxi in the paper.
+
+TO-do List
+--------------------------
+
+1, re-code based on new version of Nematus;
+
+2, release other codes for variant models in the paper.
 
