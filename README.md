@@ -70,6 +70,8 @@ We 're all born . We all bring our children into the world .####We go through in
 
 where the delimiter "@@@@" is used to separate historical and current sentences; and the the delimiter "####" is sentence boundary.
 
+We use jieba segmentor (https://github.com/fxsjy/jieba) for Chinese segmentation, and use Moses scripts (https://github.com/moses-smt/mosesdecoder/tree/master/scripts/tokenizer) for English tokenization.
+
 2, Training
 
 2.1 Use data_iterator_src_hist.py instead of data_iterator.py for loading data.
