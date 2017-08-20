@@ -36,5 +36,11 @@ NOTE: This will install the development version of Theano, if Theano is not curr
 How to Run?
 --------------------------
 
+1, Pre-processing
+
+Assume that the number of history sentence is 5 ($hist_len = 5$)
+
+Process the source side file (train/dev/test) into the following format:
+
 
 
